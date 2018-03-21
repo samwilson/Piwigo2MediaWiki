@@ -1,7 +1,7 @@
 {
     "name": "samwilson/piwigo2mediawiki",
     "description": "A Piwigo plugin for exporting photos to MediaWiki wikis.",
-    "license": "GPL-3.0+",
+    "license": "GPL-3.0-or-later",
     "require": {
     },
     "require-dev": {
