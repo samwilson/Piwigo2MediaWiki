@@ -17,6 +17,7 @@
         </properties>
     </rule>
     <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman" />
+    <rule ref="Generic.Arrays.DisallowShortArraySyntax" />
     <rule ref="Squiz.Strings.ConcatenationSpacing" />
     <rule ref="Generic.Files.LineEndings" />
     <rule ref="Generic.Files.LineLength">
@@ -24,6 +25,7 @@
             <property name="absoluteLineLimit" value="79" />
         </properties>
     </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
 
     <file>.</file>
 

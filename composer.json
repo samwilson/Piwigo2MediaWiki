@@ -3,6 +3,7 @@
     "description": "A Piwigo plugin for exporting photos to MediaWiki wikis.",
     "license": "GPL-3.0-or-later",
     "require": {
+        "addwiki/mediawiki-api": "^0.7"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0",
@@ -15,10 +16,6 @@
             "./vendor/bin/parallel-lint --exclude vendor .",
             "./vendor/bin/phpcs --standard=.phpcs.xml -s .",
             "./vendor/bin/minus-x check ."
-        ],
-        "fix": [
-            "./vendor/bin/phpcbf .",
-            "./vendor/bin/minus-x fix ."
         ]
     }
 }

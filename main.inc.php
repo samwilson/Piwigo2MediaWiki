@@ -14,17 +14,14 @@ defined('PHPWG_ROOT_PATH') or exit(1);
 // Define plugin's paths etc.
 define('PIWIGO2MEDIAWIKI_ID', 'piwigo2mediawiki');
 define('PIWIGO2MEDIAWIKI_PATH', PHPWG_PLUGINS_PATH.PIWIGO2MEDIAWIKI_ID.'/');
+define('PIWIGO2MEDIAWIKI_PAGE', 'plugin-'.PIWIGO2MEDIAWIKI_ID);
 define(
   'PIWIGO2MEDIAWIKI_ADMIN',
-  get_root_url().'admin.php?page=plugin-'.PIWIGO2MEDIAWIKI_ID
-);
-define(
-  'PIWIGO2MEDIAWIKI_PUBLIC',
-  get_absolute_root_url().make_index_url(['section' => 'piwigo2mediawiki']).'/'
+  get_absolute_root_url().'admin.php?page=plugin-'.PIWIGO2MEDIAWIKI_ID
 );
 define(
   'PIWIGO2MEDIAWIKI_DIR',
-  PHPWG_ROOT_PATH.PWG_LOCAL_DIR.PIWIGO2MEDIAWIKI_ID.'/'
+  realpath(PHPWG_PLUGINS_PATH.PIWIGO2MEDIAWIKI_ID).'/'
 );
 
 // Complain if our plugin directory is not named correctly.
@@ -54,11 +51,25 @@ if (defined('IN_ADMIN')) {
 
   // Add the admin menu item.
   add_event_handler('get_admin_plugin_menu_links', function($menu) {
-    $menu[] = [
+    $menu[] = array(
       'NAME' => l10n('Piwigo to MediaWiki'),
       'URL' => PIWIGO2MEDIAWIKI_ADMIN,
-    ];
+    );
     return $menu;
   });
+
+  // Add the send-to-MediaWiki global action.
+  add_event_handler('loc_end_element_set_global',
+    function () {
+      global $template, $conf;
+      $content = $template->assign( PIWIGO2MEDIAWIKI_DIR.'action.tpl' );
+      $template->append('element_set_global_plugins_actions',
+        array(
+          'ID' => PIWIGO2MEDIAWIKI_ID,
+          'NAME' => l10n('Copy to MediaWiki'), 'CONTENT' => $content,
+        )
+      );
+    }
+  );
 
 }
