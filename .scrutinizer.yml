@@ -13,3 +13,8 @@ build:
         override:
             -
                 command: composer test
+    nodes:
+        analysis:
+            tests:
+                override:
+                  - php-scrutinizer-run
